@@ -1,12 +1,8 @@
-#Pull the base image as Ubuntu
-FROM ubuntu:18.04
-
-#Add a user with userid 8877 and name nonroot
-RUN apt-get update && apt-get install -y sudo && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN useradd -u 8877 tmp8877
-
-#Run Container as nonroot
-USER tmp8877
+ARG ROS_MELODIC_BASE_TAG=0b33e61-20201008
+FROM rrdockerhub/ros-base-melodic-amd64:$ROS_MELODIC_BASE_TAG
+RUN groupadd -g 1000 rr && \
+    useradd -u 1000 -g 1000 -mrs /bin/bash -b /home -p $(openssl passwd -1 rr) rr && \
+    usermod -aG sudo rr && \
+    echo "rr ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+ENV DEBIAN_FRONTEND=noninteractive
+ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
