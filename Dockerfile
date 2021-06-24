@@ -1,4 +1,10 @@
-FROM rrdockerhub/ros-base-melodic-amd64
+FROM ubuntu:18.04
+RUN apt update && \
+    apt install -y \
+    openssl \
+    sudo \
+    nano && \
+    apt clean
 RUN groupadd -g 1000 rr && \
     useradd -u 1000 -g 1000 -mrs /bin/bash -b /home -p $(openssl passwd -1 rr) rr && \
     usermod -aG sudo rr && \
