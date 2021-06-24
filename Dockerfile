@@ -5,3 +5,4 @@ RUN groupadd -g 1000 rr && \
     echo "rr ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 ENV DEBIAN_FRONTEND=noninteractive
 ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
+USER rr
