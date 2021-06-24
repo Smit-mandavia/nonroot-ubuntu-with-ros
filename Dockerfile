@@ -1,4 +1,4 @@
-FROM rrdockerhub/ros-base-melodic-amd64:0b33e61-20201008
+FROM rrdockerhub/ros-base-melodic-amd64
 RUN groupadd -g 1000 rr && \
     useradd -u 1000 -g 1000 -mrs /bin/bash -b /home -p $(openssl passwd -1 rr) rr && \
     usermod -aG sudo rr && \
